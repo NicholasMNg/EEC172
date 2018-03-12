@@ -1,0 +1,22 @@
+runtime: nodejs
+env: flex
+
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
+
+env_variables:
+  NODE_ENV: production
+  SQL_USER: eec172
+  SQL_PASSWORD: eec172
+  SQL_DATABASE: email-users
+  INSTANCE_CONNECTION_NAME: eec172-197408:us-west1:email-client
+  MAILJET_PUBLIC: 9aa4313b63c99304d4ff7f4be220fb27
+  MAILJET_PRIVATE: fa53ec248fc524c0c650958a5e987d8a
+
+
+beta_settings:
+  cloud_sql_instances: eec172-197408:us-west1:email-client

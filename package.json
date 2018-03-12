@@ -1,0 +1,78 @@
+{
+  "name": "eec172-email-client",
+  "version": "1.0.0",
+  "author": "nmng",
+  "license": "MIT",
+  "engines": {
+    "node": ">=4.3.2"
+  },
+  "scripts": {
+    "deploy": "gcloud app deploy",
+    "lint": "samples lint",
+    "pretest": "npm run lint",
+    "unit-test": "ava --verbose test/*.test.js",
+    "start-proxy": "! pgrep cloud_sql_proxy > /dev/null && cloud_sql_proxy -instances=$INSTANCE_CONNECTION_NAME=tcp:$SQL_PORT &",
+    "system-test": "samples test app",
+    "system-test-proxy": "npm run start-proxy; npm run system-test",
+    "all-test": "npm run unit-test && npm run system-test",
+    "test": "samples test run --cmd npm -- run all-test",
+    "e2e-test": "samples test deploy"
+  },
+  "dependencies": {
+    "async": "2.5.0",
+    "base64-js": "^1.2.3",
+    "base64js": "^1.0.1",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.2",
+    "express": "4.16.2",
+    "fs": "0.0.1-security",
+    "google-auth-library": "^0.12.0",
+    "googleapis": "^25.0.0",
+    "html-to-text": "^4.0.0",
+    "knex": "0.14.3",
+    "multer": "^1.3.0",
+    "mysql": "2.14.1",
+    "node-gmail-api": "^0.6.1",
+    "node-mailjet": "^3.2.1",
+    "nodemailer": "^4.6.0",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
+    "prompt": "1.0.0",
+    "querystring": "^0.2.0",
+    "randomstring": "^1.1.5",
+    "text-encoder-lite": "^1.0.1"
+  },
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "1.4.17",
+    "ava": "0.22.0"
+  },
+  "cloud-repo-tools": {
+    "requiresKeyFile": true,
+    "requiresProjectId": true,
+    "test": {
+      "app": {
+        "requiredEnvVars": [
+          "SQL_USER",
+          "SQL_PASSWORD",
+          "SQL_DATABASE",
+          "SQL_PORT",
+          "INSTANCE_CONNECTION_NAME"
+        ],
+        "msg": "eec172 run",
+        "substitutions": "YOUR_SQL_USER=$SQL_USER,YOUR_SQL_PASSWORD=$SQL_PASSWORD,YOUR_SQL_DATABASE=$SQL_DATABASE,YOUR_INSTANCE_CONNECTION_NAME=$INSTANCE_CONNECTION_NAME",
+        "args": [
+          "Server.js"
+        ]
+      },
+      "build": {
+        "requiredEnvVars": [
+          "SQL_USER",
+          "SQL_PASSWORD",
+          "SQL_DATABASE",
+          "SQL_PORT",
+          "INSTANCE_CONNECTION_NAME"
+        ]
+      }
+    }
+  }
+}
