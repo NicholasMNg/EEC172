@@ -14,9 +14,6 @@ env_variables:
   SQL_PASSWORD: eec172
   SQL_DATABASE: email-users
   INSTANCE_CONNECTION_NAME: eec172-197408:us-west1:email-client
-  MAILJET_PUBLIC: 9aa4313b63c99304d4ff7f4be220fb27
-  MAILJET_PRIVATE: fa53ec248fc524c0c650958a5e987d8a
-
 
 beta_settings:
   cloud_sql_instances: eec172-197408:us-west1:email-client
